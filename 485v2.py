@@ -172,8 +172,8 @@ def leer_valor_tara(direccion_modbus):
 
 def reconectar_modbus():
     while not client.connect():
-        print("Error al conectar con el puerto Modbus. Reintentando en 5 segundos...")
-        time.sleep(5)
+        print("Error al conectar con el puerto Modbus. Reintentando en", config['reconnect_interval'], "segundos...")
+        time.sleep(config['reconnect_interval'])
     print("Conexión Modbus restablecida.")
 
 def reconectar_mqtt():
@@ -184,8 +184,8 @@ def reconectar_mqtt():
             print("Conexión MQTT restablecida.")
             break
         except Exception as e:
-            print(f"Error al conectar con el broker MQTT: {e}. Reintentando en 5 segundos...")
-            time.sleep(5)
+            print(f"Error al conectar con el broker MQTT: {e}. Reintentando en {config['reconnect_interval']} segundos...")
+            time.sleep(config['reconnect_interval'])
 
 def enviar_estado():
     while True:
@@ -231,9 +231,9 @@ def escanear_y_leer_peso():
                             print(f"Sin respuesta en la dirección: {direccion}")
                     except Exception as e:
                         print(f"Error al escanear la dirección {direccion}: {e}")
-                time.sleep(0.1)
+                time.sleep(config['scan_interval'])  # Usar el valor de configuración para el intervalo de sueño
             except Exception as e:
-                print(f"Error general en el proceso: {e}. Reintentando en 5 segundos...")
+                print(f"Error general en el proceso: {e}. Reintentando en {config['reconnect_interval']} segundos...")
                 reconectar_modbus()
 
 if __name__ == "__main__":
