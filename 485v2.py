@@ -226,12 +226,12 @@ def escanear_y_leer_peso():
                             mqtt_topic = f"{mqtt_base_topic}/{direccion}"
                             payload = json.dumps({"value": peso_neto})
                             mqtt_client.publish(mqtt_topic, payload)
-                            print(f"Publicado en MQTT - Tópico: {mqtt_topic}, Payload: {payload}")
+                            print(f"Peso publicado en MQTT - Tópico: {mqtt_topic}, Payload: {payload}")
                         else:
                             print(f"Sin respuesta en la dirección: {direccion}")
                     except Exception as e:
                         print(f"Error al escanear la dirección {direccion}: {e}")
-                time.sleep(config['scan_interval'])  # Usar el valor de configuración para el intervalo de sueño
+                time.sleep(config['scan_interval'])
             except Exception as e:
                 print(f"Error general en el proceso: {e}. Reintentando en {config['reconnect_interval']} segundos...")
                 reconectar_modbus()
