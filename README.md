@@ -158,6 +158,30 @@ Dosificación	sensorica/bascula/dosifica/{direccion}	{ "value": <peso_en_gramos>
 Hacer Cero	sensorica/bascula/zero/{direccion}	{ "value": true }	N/A
 Hacer Tara	sensorica/bascula/tara/{direccion}	{ "value": true }	N/A
 Leer Tara	sensorica/bascula/tara/{direccion}	{ "read": true }	{ "tara": <valor_tara_en_kg> }
+
+
+Para enviar un comando de cancelación, el tópico debería ser estructurado de la siguiente manera:
+
+sensorica/bascula/cancel/<direccion_modbus>
+
+Donde <direccion_modbus> es el número de la dirección Modbus a la cual quieres enviar el comando de cancelación. Por ejemplo, si quieres cancelar una dosificación para la dirección Modbus 3, el tópico sería:
+
+sensorica/bascula/cancel/3
+
+El payload del mensaje debería incluir el comando de cancelación, por ejemplo:
+
+json
+{
+  "value": true
+}
+
+Así, para cancelar una dosificación en la dirección Modbus 3, podrías publicar:
+
+Tópico: sensorica/bascula/cancel/3
+Payload: {"value": true}
+
+Esto asegura que el mensaje se envíe al dispositivo correcto y con el comando adecuado para que el sistema detecte y ejecute la cancelación.
+
 Contribuciones
 Si deseas contribuir a este repositorio, por favor realiza un fork y envía un pull request con tus cambios o sugerencias.
 
