@@ -16,6 +16,8 @@
     },
     "modbus_address_range": {
         "start": 2,
-        "end": 7
-    }
+        "end": 8
+    },
+    "scan_interval": 0.1,
+    "reconnect_interval": 5
 }
